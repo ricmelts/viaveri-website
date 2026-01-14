@@ -192,9 +192,6 @@ const HeroSection: React.FC = () => {
             <div className="bg-black rounded-lg overflow-hidden shadow-2xl">
               {/* Video Player */}
               <div className="relative pt-[56.25%]">
-                {/* Replace the src below with your actual video URL */}
-                {/* For YouTube: https://www.youtube.com/embed/VIDEO_ID */}
-                {/* For Vimeo: https://player.vimeo.com/video/VIDEO_ID */}
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
                   src="https://www.youtube.com/embed/xLhNE1cE_kQ?si=e3ezemogjfPTBRhg"
