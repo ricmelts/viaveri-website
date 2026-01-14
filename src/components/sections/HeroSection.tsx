@@ -173,8 +173,14 @@ const HeroSection: React.FC = () => {
 
       {/* Video Modal */}
       {showVideo && (
-        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="relative w-full max-w-4xl">
+        <div
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowVideo(false)}
+        >
+          <div
+            className="relative w-full max-w-5xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Button
               variant="outline"
               size="sm"
@@ -183,17 +189,29 @@ const HeroSection: React.FC = () => {
             >
               Close
             </Button>
-            <div className="bg-white rounded-lg p-8 text-center">
-              <h3 className="text-2xl font-bold mb-4">Demo Video Coming Soon</h3>
-              <p className="text-gray-600 mb-6">
-                We're preparing an exciting demo video to show you ViaLearn in action. 
-                Check back soon or contact us for a live demonstration.
-              </p>
-              <a href="mailto:info@viaveri.co">
-                <Button variant="primary">
-                  Request Live Demo
-                </Button>
-              </a>
+            <div className="bg-black rounded-lg overflow-hidden shadow-2xl">
+              {/* Video Player */}
+              <div className="relative pt-[56.25%]">
+                {/* Replace the src below with your actual video URL */}
+                {/* For YouTube: https://www.youtube.com/embed/VIDEO_ID */}
+                {/* For Vimeo: https://player.vimeo.com/video/VIDEO_ID */}
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/xLhNE1cE_kQ?si=e3ezemogjfPTBRhg"
+                  title="ViaLearn Demo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              {/* Video Info */}
+              <div className="bg-gray-900 p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">ViaLearn Platform Demo</h3>
+                <p className="text-gray-300 text-sm">
+                  See how ViaLearn unifies student information and automates workflows to help you focus on learning.
+                </p>
+              </div>
             </div>
           </div>
         </div>
