@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Home, Info, Target, Users, Briefcase } from 'lucide-react';
+import { Home, Info, Target, GraduationCap, Code, Briefcase, FolderOpen } from 'lucide-react';
 
 interface Section {
   id: string;
@@ -15,7 +15,10 @@ const ScrollPath: React.FC = () => {
     { id: 'hero', label: 'Home', icon: <Home className="h-4 w-4" /> },
     { id: 'about', label: 'About', icon: <Info className="h-4 w-4" /> },
     { id: 'mission', label: 'Mission', icon: <Target className="h-4 w-4" /> },
-    { id: 'projects', label: 'Projects', icon: <Briefcase className="h-4 w-4" /> },
+    { id: 'schools', label: 'Schools', icon: <GraduationCap className="h-4 w-4" /> },
+    { id: 'developers', label: 'Developers', icon: <Code className="h-4 w-4" /> },
+    { id: 'businesses', label: 'Businesses', icon: <Briefcase className="h-4 w-4" /> },
+    { id: 'projects', label: 'Projects', icon: <FolderOpen className="h-4 w-4" /> },
   ];
 
   useEffect(() => {
