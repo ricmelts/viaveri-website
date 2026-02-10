@@ -54,14 +54,6 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <button
-                    onClick={() => scrollToSection('team')}
-                    className="hover:text-viapurple-400 transition-colors text-left"
-                  >
-                    Team
-                  </button>
-                </li>
-                <li>
-                  <button
                     onClick={() => scrollToSection('projects')}
                     className="hover:text-viapurple-400 transition-colors text-left"
                   >
