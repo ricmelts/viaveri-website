@@ -49,18 +49,20 @@ const ProjectsSection: React.FC = () => {
       status: "live"
     },
     {
-      name: "Project Two",
-      description: "An innovative solution for [problem space]. Built with cutting-edge technology to deliver exceptional results.",
+      name: "ViaRAG",
+      description: "Fastest way to build RAG applications for backend.",
       icon: <Code className="h-8 w-8" />,
       tags: ["Web", "Cloud", "API"],
-      status: "coming-soon"
+      link: "https://viarag.ai",
+      status: "live"
     },
     {
-      name: "Project Three",
-      description: "Next-generation platform that combines AI with user-friendly design to create seamless experiences.",
+      name: "ViaStaff",
+      description: "AI Agents for small to medium-sized businesses.",
       icon: <Sparkles className="h-8 w-8" />,
-      tags: ["AI", "Design", "Innovation"],
-      status: "coming-soon"
+      tags: ["Agentic AI", "Automation", "Workflow"],
+      link: "tel:248-970-9025",
+      status: "live"
     }
   ];
 
