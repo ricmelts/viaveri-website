@@ -32,7 +32,6 @@ const Header: React.FC = () => {
   const navLinks = [
     { label: 'About', id: 'about' },
     { label: 'Mission', id: 'mission' },
-    { label: 'Team', id: 'team' },
     { label: 'Projects', id: 'projects' },
   ];
 

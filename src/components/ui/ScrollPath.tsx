@@ -15,7 +15,6 @@ const ScrollPath: React.FC = () => {
     { id: 'hero', label: 'Home', icon: <Home className="h-4 w-4" /> },
     { id: 'about', label: 'About', icon: <Info className="h-4 w-4" /> },
     { id: 'mission', label: 'Mission', icon: <Target className="h-4 w-4" /> },
-    { id: 'team', label: 'Team', icon: <Users className="h-4 w-4" /> },
     { id: 'projects', label: 'Projects', icon: <Briefcase className="h-4 w-4" /> },
   ];
 
