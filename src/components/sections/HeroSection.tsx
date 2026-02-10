@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
-import { ArrowRight, Sparkles, Code, Rocket } from 'lucide-react';
+import { ArrowRight, GraduationCap, Code, Briefcase } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -79,35 +80,35 @@ const HeroSection: React.FC = () => {
 
           {/* Feature highlights */}
           <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-viapurple-500/20 flex items-center justify-center mx-auto mb-4">
-                <Code className="h-6 w-6 text-viapurple-300" />
+            <Link to="/schools" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
+              <div className="w-12 h-12 rounded-lg bg-viapurple-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-viapurple-500/30 transition-all">
+                <GraduationCap className="h-6 w-6 text-viapurple-300" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Technology First</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">For Schools</h3>
               <p className="text-viapurple-200 text-sm">
-                Leveraging cutting-edge tech to solve complex problems
+                ViaLearn, the Canvas native assistant.
               </p>
-            </div>
+            </Link>
 
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-accent-500/20 flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="h-6 w-6 text-accent-300" />
+            <Link to="/developers" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
+              <div className="w-12 h-12 rounded-lg bg-accent-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-500/30 transition-all">
+                <Code className="h-6 w-6 text-accent-300" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Creative Solutions</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">For Developers</h3>
               <p className="text-viapurple-200 text-sm">
-                Thinking outside the box to deliver unique experiences
+                ViaRAG, the fastest RAG backend pipeline.
               </p>
-            </div>
+            </Link>
 
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-success-500/20 flex items-center justify-center mx-auto mb-4">
-                <Rocket className="h-6 w-6 text-success-300" />
+            <Link to="/businesses" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
+              <div className="w-12 h-12 rounded-lg bg-success-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-success-500/30 transition-all">
+                <Briefcase className="h-6 w-6 text-success-300" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Real Impact</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">For Businesses</h3>
               <p className="text-viapurple-200 text-sm">
-                Building products that make a difference in people's lives
+                ViaStaff, AI agent solutions for the workplace.
               </p>
-            </div>
+            </Link>
           </div>
         </div>
       </Container>

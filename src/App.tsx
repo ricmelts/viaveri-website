@@ -8,6 +8,9 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import HomePage from './pages/HomePage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import SchoolsPage from './pages/SchoolsPage';
+import DevelopersPage from './pages/DevelopersPage';
+import BusinessesPage from './pages/BusinessesPage';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/schools" element={<SchoolsPage />} />
+            <Route path="/developers" element={<DevelopersPage />} />
+            <Route path="/businesses" element={<BusinessesPage />} />
           </Routes>
         </main>
         <Footer />
