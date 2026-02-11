@@ -52,11 +52,11 @@ const HeroSection: React.FC = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Innovation Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">Technology & Creativity</span>
+            Home of  <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">ViaLearn & ViaRAG</span>
           </h1>
 
           <p className="text-lg md:text-xl text-viapurple-50/90 mb-8 max-w-2xl mx-auto">
-            ViaVeri builds cutting-edge solutions that transform industries, empower users, and create meaningful impact through innovation and thoughtful design.
+            ViaVeri builds cutting-edge software solutions across industries.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-16">
@@ -86,7 +86,7 @@ const HeroSection: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">For Schools</h3>
               <p className="text-viapurple-200 text-sm">
-                ViaLearn, the Canvas native assistant.
+                ViaLearn, the Canvas native AI assistant.
               </p>
             </Link>
 
@@ -96,7 +96,7 @@ const HeroSection: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">For Developers</h3>
               <p className="text-viapurple-200 text-sm">
-                ViaRAG, the fastest RAG backend pipeline.
+                ViaRAG, the fastest way to build RAG applications.
               </p>
             </Link>
 
@@ -106,7 +106,7 @@ const HeroSection: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">For Businesses</h3>
               <p className="text-viapurple-200 text-sm">
-                ViaStaff, AI agent solutions for the workplace.
+                ViaStaff, an AI agent solution for your workplace that won't break your budget.
               </p>
             </Link>
           </div>
