@@ -58,7 +58,7 @@ const ProjectsSection: React.FC = () => {
     },
     {
       name: "ViaStaff",
-      description: "AI Agents for small to medium-sized businesses.",
+      description: "AI  agents and automation for Realty, Banks, Medical Offices, and more.",
       icon: <Sparkles className="h-8 w-8" />,
       tags: ["Agentic AI", "Automation", "Workflow"],
       link: "tel:248-970-9025",
