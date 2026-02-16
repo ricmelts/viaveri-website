@@ -42,7 +42,7 @@ const ProjectsSection: React.FC = () => {
   const projects: Project[] = [
     {
       name: "ViaLearn",
-      description: "Unified educational platform that automates workflows, helps students plan coursework, and provides teachers with powerful analytics for pre-grading and performance tracking.",
+      description: "A Canvas app that helps students plan coursework, and provides teachers with powerful analytics, pre-grading, and performance tracking.",
       icon: <Brain className="h-8 w-8" />,
       tags: ["Education", "AI/ML", "Analytics", "Automation"],
       link: "https://vialearn.io",
@@ -52,13 +52,13 @@ const ProjectsSection: React.FC = () => {
       name: "ViaRAG",
       description: "Fastest way to build RAG applications for backend.",
       icon: <Code className="h-8 w-8" />,
-      tags: ["Web", "Cloud", "API"],
+      tags: ["Open Source", "Cloud", "API"],
       link: "https://viarag.ai",
       status: "live"
     },
     {
       name: "ViaStaff",
-      description: "AI  agents and automation for Realty, Banks, Medical Offices, and more.",
+      description: "Easy to deploy AI agents, call our demo and learn more.",
       icon: <Sparkles className="h-8 w-8" />,
       tags: ["Agentic AI", "Automation", "Workflow"],
       link: "tel:248-970-9025",

@@ -38,7 +38,7 @@ const AboutSection: React.FC = () => {
               About <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-500 to-accent-500">ViaVeri</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're on a mission to transform industries through innovative technology solutions,
+              We're on a mission to transform business AI experience by providing custom solutions,
               creative problem-solving, and a commitment to excellence.
             </p>
           </div>
@@ -50,7 +50,7 @@ const AboutSection: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Innovation First</h3>
               <p className="text-gray-600">
-                We push boundaries and explore new frontiers in technology to create solutions that make a difference.
+                We are committed to developing open-source projects and love to build community through innovative projects.
               </p>
             </div>
 
@@ -60,7 +60,7 @@ const AboutSection: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">User-Focused</h3>
               <p className="text-gray-600">
-                Every product we build starts with understanding the needs of the people who will use it.
+                Every product we build starts with fixing real people's problems. 
               </p>
             </div>
 
@@ -70,7 +70,7 @@ const AboutSection: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Impact Driven</h3>
               <p className="text-gray-600">
-                We measure success by the positive impact our solutions have on people's lives and workflows.
+                We measure success by our positive impact on the community and their feedback to our products.
               </p>
             </div>
           </div>
@@ -78,8 +78,7 @@ const AboutSection: React.FC = () => {
           <div className="bg-gradient-to-br from-viapurple-50 to-accent-50 rounded-2xl p-8 md:p-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Story</h3>
             <p className="text-gray-700 leading-relaxed mb-4">
-              ViaVeri was founded with a simple belief: technology should empower people, not complicate their lives.
-              From our first project to our current portfolio, we've stayed true to this vision.
+              ViaVeri was founded with a simple belief: technology shouldn't be gatekept and education for it should be accessible to everyone.
             </p>
             <p className="text-gray-700 leading-relaxed">
               Today, we're proud to work on cutting-edge solutions across education, automation, and beyond.

@@ -44,7 +44,7 @@ const SchoolsSection: React.FC = () => {
               ViaLearn: The <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-500 to-accent-500">Canvas Native Assistant</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              A unified educational platform that automates workflows, helps students plan coursework,
+              A unified plugin that helps students plan coursework,
               and provides teachers with powerful analytics.
             </p>
           </div>
@@ -56,7 +56,7 @@ const SchoolsSection: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Workflow Automation</h3>
               <p className="text-gray-600 text-sm">
-                Automate repetitive tasks and streamline administrative processes.
+                Automatically retrieve assignments, get custom feedback, and more.
               </p>
             </div>
 
@@ -66,7 +66,7 @@ const SchoolsSection: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Course Planning</h3>
               <p className="text-gray-600 text-sm">
-                Help students plan their coursework with intelligent scheduling.
+                Use plain english to make your plans.
               </p>
             </div>
 
@@ -76,7 +76,7 @@ const SchoolsSection: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Teacher Analytics</h3>
               <p className="text-gray-600 text-sm">
-                Powerful analytics for pre-grading and performance tracking.
+                Pre-grade assignments before final destinations and track problems before they arise on the exam.
               </p>
             </div>
           </div>
