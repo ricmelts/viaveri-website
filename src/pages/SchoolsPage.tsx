@@ -19,8 +19,8 @@ export default function SchoolsPage() {
               ViaLearn: The Canvas Native Assistant
             </h1>
             <p className="text-lg md:text-xl text-viapurple-50/90 mb-8">
-              A unified educational platform that automates workflows, helps students plan coursework,
-              and provides teachers with powerful analytics for pre-grading and performance tracking.
+              A Canvas app helps students plan coursework,
+              and provides teachers with powerful analytics, pre-grading, and performance tracking.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://vialearn.io" target="_blank" rel="noopener noreferrer">
