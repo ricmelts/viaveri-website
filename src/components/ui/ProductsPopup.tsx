@@ -1,7 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Globe, Brain, Briefcase, ArrowRight, Check, ArrowLeft } from 'lucide-react';
 
 const CALENDLY_URL = 'https://calendly.com/eric-viaveri/new-meeting';
+
+const buildCalendlyEmbedSrc = () => {
+  const domain =
+    typeof window !== 'undefined' ? window.location.hostname : 'viaveri.co';
+  const params = new URLSearchParams({
+    embed_domain: domain,
+    embed_type: 'Inline',
+    hide_gdpr_banner: '1',
+  });
+  return `${CALENDLY_URL}?${params.toString()}`;
+};
 
 const BOOKING_LINKS = {
   website: 'calendly',
@@ -11,17 +22,6 @@ const BOOKING_LINKS = {
 
 const STORAGE_KEY = 'viaveri_products_popup_seen';
 export const OPEN_PRODUCTS_POPUP_EVENT = 'viaveri:open-products';
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initInlineWidget: (opts: {
-        url: string;
-        parentElement: HTMLElement;
-      }) => void;
-    };
-  }
-}
 
 interface Product {
   id: string;
@@ -130,39 +130,9 @@ const accentStyles = {
 
 type View = 'cards' | 'calendly';
 
-const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
-const CALENDLY_CSS_HREF = 'https://assets.calendly.com/assets/external/widget.css';
-
-const ensureCalendlyAssets = () => {
-  if (!document.querySelector(`link[href="${CALENDLY_CSS_HREF}"]`)) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = CALENDLY_CSS_HREF;
-    document.head.appendChild(link);
-  }
-  if (window.Calendly) return Promise.resolve();
-  return new Promise<void>((resolve, reject) => {
-    const existing = document.querySelector<HTMLScriptElement>(
-      `script[src="${CALENDLY_SCRIPT_SRC}"]`,
-    );
-    if (existing) {
-      existing.addEventListener('load', () => resolve());
-      existing.addEventListener('error', () => reject());
-      return;
-    }
-    const s = document.createElement('script');
-    s.src = CALENDLY_SCRIPT_SRC;
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => reject();
-    document.head.appendChild(s);
-  });
-};
-
 const ProductsPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState<View>('cards');
-  const calendlyHostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -200,28 +170,6 @@ const ProductsPopup: React.FC = () => {
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener('keydown', onKey);
-    };
-  }, [isOpen, view]);
-
-  useEffect(() => {
-    if (!isOpen || view !== 'calendly') return;
-    let cancelled = false;
-
-    ensureCalendlyAssets()
-      .then(() => {
-        if (cancelled || !calendlyHostRef.current || !window.Calendly) return;
-        calendlyHostRef.current.innerHTML = '';
-        window.Calendly.initInlineWidget({
-          url: CALENDLY_URL,
-          parentElement: calendlyHostRef.current,
-        });
-      })
-      .catch(() => {
-        /* swallow — user can retry or use mailto */
-      });
-
-    return () => {
-      cancelled = true;
     };
   }, [isOpen, view]);
 
@@ -286,10 +234,11 @@ const ProductsPopup: React.FC = () => {
               Back to options
             </button>
             <div className="rounded-xl overflow-hidden bg-white">
-              <div
-                ref={calendlyHostRef}
-                className="calendly-inline-widget"
-                style={{ minWidth: 320, height: 720 }}
+              <iframe
+                src={buildCalendlyEmbedSrc()}
+                title="Schedule with ViaVeri"
+                loading="lazy"
+                style={{ minWidth: 320, width: '100%', height: 720, border: 0 }}
               />
             </div>
           </div>
