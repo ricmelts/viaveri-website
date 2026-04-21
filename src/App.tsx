@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/layout/ScrollToTop';
+import ProductsPopup from './components/ui/ProductsPopup';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -29,6 +30,7 @@ function App() {
         </main>
         <Footer />
         <ScrollToTop />
+        <ProductsPopup />
       </div>
     </Router>
   );

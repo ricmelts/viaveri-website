@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Brain, Menu, X } from 'lucide-react';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
+import { OPEN_PRODUCTS_POPUP_EVENT } from '../ui/ProductsPopup';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,13 +30,23 @@ const Header: React.FC = () => {
     }
   };
 
-  const navLinks = [
+  const openConsulting = () => {
+    window.dispatchEvent(new CustomEvent(OPEN_PRODUCTS_POPUP_EVENT));
+    setIsMobileMenuOpen(false);
+  };
+
+  type NavLink =
+    | { label: string; id: string; action?: undefined }
+    | { label: string; action: 'consulting'; id?: undefined };
+
+  const navLinks: NavLink[] = [
     { label: 'About', id: 'about' },
     { label: 'Mission', id: 'mission' },
     { label: 'Schools', id: 'schools' },
     { label: 'Developers', id: 'developers' },
     { label: 'Businesses', id: 'businesses' },
     { label: 'Projects', id: 'projects' },
+    { label: 'Consulting', action: 'consulting' },
   ];
 
   return (
@@ -62,8 +73,12 @@ const Header: React.FC = () => {
             <nav className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
+                  key={link.id ?? link.action}
+                  onClick={() =>
+                    link.action === 'consulting'
+                      ? openConsulting()
+                      : scrollToSection(link.id!)
+                  }
                   className={`text-sm font-medium transition-colors ${
                     isScrolled
                       ? 'text-gray-600 hover:text-viapurple-600'
@@ -77,6 +92,18 @@ const Header: React.FC = () => {
           )}
 
           <div className="flex items-center gap-4">
+            {!isHomePage && (
+              <button
+                onClick={openConsulting}
+                className={`text-sm font-medium transition-colors ${
+                  isScrolled
+                    ? 'text-gray-600 hover:text-viapurple-600'
+                    : 'text-white/90 hover:text-white'
+                }`}
+              >
+                Consulting
+              </button>
+            )}
             <a href="mailto:info@viaveri.co">
               <Button variant="primary" size="sm">
                 Get in Touch
@@ -100,8 +127,12 @@ const Header: React.FC = () => {
           <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3">
             {navLinks.map((link) => (
               <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                key={link.id ?? link.action}
+                onClick={() =>
+                  link.action === 'consulting'
+                    ? openConsulting()
+                    : scrollToSection(link.id!)
+                }
                 className={`text-left py-2 px-4 rounded-lg text-sm font-medium transition-colors ${
                   isScrolled
                     ? 'text-gray-700 hover:bg-gray-100'
