@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { X, Globe, Brain, Briefcase, ArrowRight, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { X, Globe, Brain, Briefcase, ArrowRight, Check, ArrowLeft } from 'lucide-react';
 
-// Replace with your real booking URLs (Google Calendar appointment schedule,
-// Calendly, Cal.com, etc.). Each card opens its own booking page.
+const CALENDLY_URL = 'https://calendly.com/eric-viaveri/new-meeting';
+
 const BOOKING_LINKS = {
-  website: 'https://calendar.app.google/jiKdgm3onaX4xLSP6',
-  aiAudit: 'https://calendar.app.google/5tVVWiztn5pXqzhC8',
+  website: 'calendly',
+  aiAudit: 'mailto:info@viaveri.co?subject=AI%20Audit%20Inquiry',
   consulting: 'mailto:info@viaveri.co?subject=Hands-On%20Consulting%20Inquiry',
 };
 
 const STORAGE_KEY = 'viaveri_products_popup_seen';
 export const OPEN_PRODUCTS_POPUP_EVENT = 'viaveri:open-products';
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (opts: {
+        url: string;
+        parentElement: HTMLElement;
+      }) => void;
+    };
+  }
+}
 
 interface Product {
   id: string;
@@ -23,7 +34,6 @@ interface Product {
   features: string[];
   cta: string;
   href: string;
-  image?: string;
   accent: 'viapurple' | 'accent' | 'success';
   highlight?: boolean;
 }
@@ -36,7 +46,8 @@ const products: Product[] = [
     title: '$499 Websites',
     price: '$499',
     priceSuffix: 'one-time',
-    description: 'Bring your idea, shop, or blog to life — fast, beautifully, without the back-and-forth.',
+    description:
+      'Bring your idea, shop, or blog to life — fast, beautifully, without the back-and-forth.',
     features: [
       'Custom design',
       'Mobile optimized',
@@ -62,7 +73,7 @@ const products: Product[] = [
       'AI business scaling pro',
       'Actionable written report',
     ],
-    cta: 'Book your audit',
+    cta: 'Email to book',
     href: BOOKING_LINKS.aiAudit,
     accent: 'accent',
     highlight: true,
@@ -117,13 +128,49 @@ const accentStyles = {
   },
 };
 
+type View = 'cards' | 'calendly';
+
+const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
+const CALENDLY_CSS_HREF = 'https://assets.calendly.com/assets/external/widget.css';
+
+const ensureCalendlyAssets = () => {
+  if (!document.querySelector(`link[href="${CALENDLY_CSS_HREF}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = CALENDLY_CSS_HREF;
+    document.head.appendChild(link);
+  }
+  if (window.Calendly) return Promise.resolve();
+  return new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${CALENDLY_SCRIPT_SRC}"]`,
+    );
+    if (existing) {
+      existing.addEventListener('load', () => resolve());
+      existing.addEventListener('error', () => reject());
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = CALENDLY_SCRIPT_SRC;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject();
+    document.head.appendChild(s);
+  });
+};
+
 const ProductsPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [view, setView] = useState<View>('cards');
+  const calendlyHostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const onExternalOpen = () => setIsOpen(true);
+    const onExternalOpen = () => {
+      setView('cards');
+      setIsOpen(true);
+    };
     window.addEventListener(OPEN_PRODUCTS_POPUP_EVENT, onExternalOpen);
 
     const seen = sessionStorage.getItem(STORAGE_KEY);
@@ -143,7 +190,10 @@ const ProductsPopup: React.FC = () => {
     document.body.style.overflow = 'hidden';
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') {
+        if (view === 'calendly') setView('cards');
+        else close();
+      }
     };
     window.addEventListener('keydown', onKey);
 
@@ -151,15 +201,51 @@ const ProductsPopup: React.FC = () => {
       document.body.style.overflow = prev;
       window.removeEventListener('keydown', onKey);
     };
-  }, [isOpen]);
+  }, [isOpen, view]);
+
+  useEffect(() => {
+    if (!isOpen || view !== 'calendly') return;
+    let cancelled = false;
+
+    ensureCalendlyAssets()
+      .then(() => {
+        if (cancelled || !calendlyHostRef.current || !window.Calendly) return;
+        calendlyHostRef.current.innerHTML = '';
+        window.Calendly.initInlineWidget({
+          url: CALENDLY_URL,
+          parentElement: calendlyHostRef.current,
+        });
+      })
+      .catch(() => {
+        /* swallow — user can retry or use mailto */
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, view]);
 
   const close = () => {
     setIsOpen(false);
+    setView('cards');
     try {
       sessionStorage.setItem(STORAGE_KEY, '1');
     } catch {
       /* ignore */
     }
+  };
+
+  const handleCtaClick = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+    href: string,
+  ) => {
+    if (href === 'calendly') {
+      e.preventDefault();
+      setView('calendly');
+      return;
+    }
+    // mailto or external — let the browser handle, then close popup
+    close();
   };
 
   if (!isOpen) return null;
@@ -189,122 +275,143 @@ const ProductsPopup: React.FC = () => {
           <X className="h-5 w-5" />
         </button>
 
-        <div className="relative p-6 sm:p-10">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <div className="inline-flex items-center rounded-full border border-viapurple-400/30 bg-viapurple-800/30 px-3 py-1 text-sm text-viapurple-100 backdrop-blur-sm mb-4">
-              <span className="flex h-2 w-2 rounded-full bg-success-400 mr-2 animate-pulse" />
-              Special Offers
-            </div>
-            <h2
-              id="products-popup-title"
-              className="text-3xl sm:text-4xl font-bold text-white mb-3"
+        {view === 'calendly' ? (
+          <div className="relative p-4 sm:p-6">
+            <button
+              type="button"
+              onClick={() => setView('cards')}
+              className="inline-flex items-center gap-2 mb-4 text-sm font-medium text-viapurple-100 hover:text-white transition-colors"
             >
-              Pick what fits your{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">
-                next move
-              </span>
-            </h2>
-            <p className="text-viapurple-100/80">
-              From a fast launch site to a full AI strategy audit — book a time that works and we'll take it from there.
-            </p>
+              <ArrowLeft className="h-4 w-4" />
+              Back to options
+            </button>
+            <div className="rounded-xl overflow-hidden bg-white">
+              <div
+                ref={calendlyHostRef}
+                className="calendly-inline-widget"
+                style={{ minWidth: 320, height: 720 }}
+              />
+            </div>
           </div>
+        ) : (
+          <div className="relative p-6 sm:p-10">
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+              <div className="inline-flex items-center rounded-full border border-viapurple-400/30 bg-viapurple-800/30 px-3 py-1 text-sm text-viapurple-100 backdrop-blur-sm mb-4">
+                <span className="flex h-2 w-2 rounded-full bg-success-400 mr-2 animate-pulse" />
+                Special Offers
+              </div>
+              <h2
+                id="products-popup-title"
+                className="text-3xl sm:text-4xl font-bold text-white mb-3"
+              >
+                Pick what fits your{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">
+                  next move
+                </span>
+              </h2>
+              <p className="text-viapurple-100/80">
+                From a fast launch site to a full AI strategy audit — book a time that works and we'll take it from there.
+              </p>
+            </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {products.map((p) => {
-              const styles = accentStyles[p.accent];
-              return (
-                <div
-                  key={p.id}
-                  className={`relative flex flex-col rounded-xl border bg-white/5 backdrop-blur-sm p-6 transition-all ${
-                    p.highlight
-                      ? 'border-accent-400/50 ring-1 ring-accent-400/30 md:-translate-y-2'
-                      : 'border-white/10'
-                  } ${styles.ring}`}
-                >
-                  {p.badge && (
-                    <span
-                      className={`absolute -top-3 left-6 inline-flex items-center rounded-full border px-3 py-0.5 text-xs font-medium ${styles.badge}`}
-                    >
-                      {p.badge}
-                    </span>
-                  )}
-
-                  {p.image && (
-                    <div className="mb-4 overflow-hidden rounded-lg border border-white/10 bg-viapurple-950/50">
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        className="w-full h-36 object-cover"
-                      />
-                    </div>
-                  )}
-
+            <div className="grid gap-5 md:grid-cols-3">
+              {products.map((p) => {
+                const styles = accentStyles[p.accent];
+                const isCalendly = p.href === 'calendly';
+                const isExternal = p.href.startsWith('http');
+                return (
                   <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${styles.iconBg}`}
+                    key={p.id}
+                    className={`relative flex flex-col rounded-xl border bg-white/5 backdrop-blur-sm p-6 transition-all ${
+                      p.highlight
+                        ? 'border-accent-400/50 ring-1 ring-accent-400/30 md:-translate-y-2'
+                        : 'border-white/10'
+                    } ${styles.ring}`}
                   >
-                    {p.icon}
-                  </div>
-
-                  <h3 className="text-xl font-semibold text-white mb-1">
-                    {p.title}
-                  </h3>
-
-                  <div className="flex items-baseline gap-2 mb-3">
-                    <span className={`text-3xl font-bold ${styles.price}`}>
-                      {p.price}
-                    </span>
-                    {p.priceSuffix && (
-                      <span className="text-sm text-viapurple-200/80">
-                        {p.priceSuffix}
+                    {p.badge && (
+                      <span
+                        className={`absolute -top-3 left-6 inline-flex items-center rounded-full border px-3 py-0.5 text-xs font-medium ${styles.badge}`}
+                      >
+                        {p.badge}
                       </span>
                     )}
-                  </div>
 
-                  <p className="text-sm text-viapurple-100/80 mb-5">
-                    {p.description}
-                  </p>
+                    <div
+                      className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${styles.iconBg}`}
+                    >
+                      {p.icon}
+                    </div>
 
-                  <ul className="space-y-2 mb-6">
-                    {p.features.map((f) => (
-                      <li
-                        key={f}
-                        className="flex items-start gap-2 text-sm text-viapurple-50"
+                    <h3 className="text-xl font-semibold text-white mb-1">
+                      {p.title}
+                    </h3>
+
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className={`text-3xl font-bold ${styles.price}`}>
+                        {p.price}
+                      </span>
+                      {p.priceSuffix && (
+                        <span className="text-sm text-viapurple-200/80">
+                          {p.priceSuffix}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-sm text-viapurple-100/80 mb-5">
+                      {p.description}
+                    </p>
+
+                    <ul className="space-y-2 mb-6">
+                      {p.features.map((f) => (
+                        <li
+                          key={f}
+                          className="flex items-start gap-2 text-sm text-viapurple-50"
+                        >
+                          <Check
+                            className={`h-4 w-4 mt-0.5 flex-shrink-0 ${styles.check}`}
+                          />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {isCalendly ? (
+                      <button
+                        type="button"
+                        onClick={(e) => handleCtaClick(e, p.href)}
+                        className={`mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium transition-colors ${styles.button}`}
                       >
-                        <Check
-                          className={`h-4 w-4 mt-0.5 flex-shrink-0 ${styles.check}`}
-                        />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
+                        {p.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </button>
+                    ) : (
+                      <a
+                        href={p.href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        onClick={(e) => handleCtaClick(e, p.href)}
+                        className={`mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium transition-colors ${styles.button}`}
+                      >
+                        {p.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
 
-                  <a
-                    href={p.href}
-                    target={p.href.startsWith('http') ? '_blank' : undefined}
-                    rel={
-                      p.href.startsWith('http') ? 'noopener noreferrer' : undefined
-                    }
-                    onClick={close}
-                    className={`mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium transition-colors ${styles.button}`}
-                  >
-                    {p.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </div>
-              );
-            })}
+            <p className="mt-8 text-center text-xs text-viapurple-200/70">
+              Questions? Email{' '}
+              <a
+                href="mailto:info@viaveri.co"
+                className="underline hover:text-white"
+              >
+                info@viaveri.co
+              </a>
+            </p>
           </div>
-
-          <p className="mt-8 text-center text-xs text-viapurple-200/70">
-            Questions? Email{' '}
-            <a
-              href="mailto:eric@viaveri.co"
-              className="underline hover:text-white"
-            >
-              eric@viaveri.co
-            </a>
-          </p>
-        </div>
+        )}
       </div>
     </div>
   );
