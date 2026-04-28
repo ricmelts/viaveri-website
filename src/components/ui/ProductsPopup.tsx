@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { X, Globe, Brain, Briefcase, ArrowRight, Check, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import {
+  X,
+  Globe,
+  Brain,
+  Briefcase,
+  ArrowRight,
+  Check,
+  ArrowLeft,
+  PartyPopper,
+} from 'lucide-react';
 
 const CALENDLY_URL = 'https://calendly.com/eric-viaveri/new-meeting';
 
@@ -22,6 +32,20 @@ const BOOKING_LINKS = {
 
 const STORAGE_KEY = 'viaveri_products_popup_seen';
 export const OPEN_PRODUCTS_POPUP_EVENT = 'viaveri:open-products';
+
+type FbqFn = (...args: unknown[]) => void;
+const trackPixel = (event: string, params?: Record<string, unknown>) => {
+  if (typeof window === 'undefined') return;
+  const fbq = (window as unknown as { fbq?: FbqFn }).fbq;
+  if (typeof fbq === 'function') fbq('track', event, params);
+};
+
+const WEBSITE_PIXEL_PARAMS = {
+  content_name: '$499 Website',
+  content_category: 'Website Package',
+  value: 499,
+  currency: 'USD',
+};
 
 interface Product {
   id: string;
@@ -66,12 +90,12 @@ const products: Product[] = [
     price: '$1,499',
     priceSuffix: '3-hour deep dive',
     description:
-      'A 3-hour session with three specialists — a Double-PhD computer scientist, a Cybersecurity master, and an AI business-scaling expert — mapping how to leverage new and existing AI tools across your business.',
+      'A 3-hour session with three specialists — a computer scientist, a business expert, and an AI expert — mapping how to leverage our services for your business.',
     features: [
-      'Double-PhD Computer Scientist',
-      'Masters in Cybersecurity',
-      'AI business scaling pro',
-      'Actionable written report',
+      'General Audit',
+      'Actionable Recommendations',
+      'Tool Demonstrations',
+      'Written report',
     ],
     cta: 'Email to book',
     href: BOOKING_LINKS.aiAudit,
@@ -128,11 +152,17 @@ const accentStyles = {
   },
 };
 
-type View = 'cards' | 'calendly';
+type View = 'cards' | 'calendly' | 'booked';
+
+const BOOKED_REDIRECT_MS = 6000;
 
 const ProductsPopup: React.FC = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState<View>('cards');
+  const [secondsLeft, setSecondsLeft] = useState(
+    Math.round(BOOKED_REDIRECT_MS / 1000),
+  );
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -162,6 +192,7 @@ const ProductsPopup: React.FC = () => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         if (view === 'calendly') setView('cards');
+        else if (view === 'booked') finishAndGoHome();
         else close();
       }
     };
@@ -173,6 +204,46 @@ const ProductsPopup: React.FC = () => {
     };
   }, [isOpen, view]);
 
+  useEffect(() => {
+    if (view !== 'calendly') return;
+
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== 'https://calendly.com') return;
+      const data = e.data;
+      if (
+        data &&
+        typeof data === 'object' &&
+        data.event === 'calendly.event_scheduled'
+      ) {
+        trackPixel('Schedule', WEBSITE_PIXEL_PARAMS);
+        trackPixel('Lead', WEBSITE_PIXEL_PARAMS);
+        setSecondsLeft(Math.round(BOOKED_REDIRECT_MS / 1000));
+        setView('booked');
+      }
+    };
+
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [view]);
+
+  useEffect(() => {
+    if (view !== 'booked') return;
+
+    const redirectTimer = window.setTimeout(() => {
+      finishAndGoHome();
+    }, BOOKED_REDIRECT_MS);
+
+    const tick = window.setInterval(() => {
+      setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+
+    return () => {
+      window.clearTimeout(redirectTimer);
+      window.clearInterval(tick);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view]);
+
   const close = () => {
     setIsOpen(false);
     setView('cards');
@@ -183,12 +254,22 @@ const ProductsPopup: React.FC = () => {
     }
   };
 
+  const finishAndGoHome = () => {
+    close();
+    if (window.location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleCtaClick = (
     e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
     href: string,
   ) => {
     if (href === 'calendly') {
       e.preventDefault();
+      trackPixel('InitiateCheckout', WEBSITE_PIXEL_PARAMS);
       setView('calendly');
       return;
     }
@@ -223,7 +304,34 @@ const ProductsPopup: React.FC = () => {
           <X className="h-5 w-5" />
         </button>
 
-        {view === 'calendly' ? (
+        {view === 'booked' ? (
+          <div className="relative p-8 sm:p-12 text-center min-h-[420px] flex flex-col items-center justify-center">
+            <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-success-500/20 flex items-center justify-center">
+              <PartyPopper className="h-10 w-10 text-success-300" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+              You're booked!
+            </h2>
+            <p className="text-viapurple-100/90 max-w-xl mx-auto mb-2">
+              Check your inbox for the calendar invite and meeting details.
+            </p>
+            <p className="text-viapurple-200/70 text-sm max-w-xl mx-auto mb-8">
+              We'll be in touch before the call to confirm anything we need from
+              your side.
+            </p>
+            <button
+              type="button"
+              onClick={finishAndGoHome}
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-lg font-medium bg-viapurple-500 hover:bg-viapurple-600 active:bg-viapurple-700 text-white transition-colors"
+            >
+              Back to home
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <p className="mt-5 text-xs text-viapurple-200/60">
+              Redirecting in {secondsLeft}s…
+            </p>
+          </div>
+        ) : view === 'calendly' ? (
           <div className="relative p-4 sm:p-6">
             <button
               type="button"

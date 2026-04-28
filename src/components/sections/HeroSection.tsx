@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Home of  <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">ViaLearn & ViaRAG</span>
+            Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">Technology Team</span>
           </h1>
 
           <p className="text-lg md:text-xl text-viapurple-50/90 mb-8 max-w-2xl mx-auto">
