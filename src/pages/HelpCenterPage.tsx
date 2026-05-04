@@ -6,12 +6,12 @@ import { Search, Book, MessageCircle, Phone, Mail, FileText, HelpCircle, Externa
 
 const HelpCenterPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-24">
+    <div className="min-h-screen bg-white pt-24">
       <Container>
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            How can we <span className="text-viapurple-600">help you?</span>
+            How can we <span className="text-ink">help you?</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
             Find answers to common questions or get in touch with our support team.
@@ -23,7 +23,7 @@ const HelpCenterPage: React.FC = () => {
             <input
               type="text"
               placeholder="Search for help articles..."
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-viapurple-500 focus:border-transparent"
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-stone-400 focus:border-transparent"
             />
           </div>
         </div>
@@ -109,13 +109,13 @@ const HelpCenterPage: React.FC = () => {
         </div>
 
         {/* Contact Support */}
-        <div className="bg-viapurple-900 rounded-2xl p-8 md:p-12">
+        <div className="bg-ink rounded-2xl p-8 md:p-12">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-3xl font-bold text-white mb-4">
                 Still Need Help?
               </h2>
-              <p className="text-viapurple-100 mb-6">
+              <p className="text-stone-100 mb-6">
                 Our support team is available 24/7 to assist you with any questions or concerns you may have.
               </p>
               <div className="space-y-4">
@@ -132,7 +132,7 @@ const HelpCenterPage: React.FC = () => {
                 <Button 
                   variant="primary"
                   size="lg"
-                  className="bg-white text-viapurple-600 hover:bg-gray-100"
+                  className="bg-white text-ink hover:bg-stone-100"
                   icon={<ArrowRight className="h-5 w-5" />}
                   iconPosition="right"
                 >
@@ -163,8 +163,8 @@ interface QuickLinkCardProps {
 const QuickLinkCard: React.FC<QuickLinkCardProps> = ({ icon, title, description }) => {
   return (
     <Card hoverable className="flex items-start p-6">
-      <div className="bg-viapurple-100 p-3 rounded-lg mr-4">
-        <div className="text-viapurple-600">{icon}</div>
+      <div className="bg-stone-100 p-3 rounded-lg mr-4">
+        <div className="text-ink">{icon}</div>
       </div>
       <div>
         <h3 className="font-semibold mb-1">{title}</h3>
@@ -183,7 +183,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ title, items }) => {
   return (
     <Card hoverable>
       <div className="flex items-center mb-4">
-        <HelpCircle className="h-5 w-5 text-viapurple-600 mr-2" />
+        <HelpCircle className="h-5 w-5 text-ink mr-2" />
         <h3 className="font-semibold">{title}</h3>
       </div>
       <ul className="space-y-2">
@@ -191,7 +191,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ title, items }) => {
           <li key={index}>
             <a
               href="#"
-              className="flex items-center text-gray-600 hover:text-viapurple-600 transition-colors"
+              className="flex items-center text-gray-600 hover:text-ink transition-colors"
             >
               <ExternalLink className="h-4 w-4 mr-2" />
               {item}

@@ -42,13 +42,13 @@ const positions: JobPosition[] = [
 
 const CareersPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-24">
+    <div className="min-h-screen bg-white pt-24">
       {/* Hero Section */}
       <section className="py-16">
         <Container>
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Join Our <span className="text-viapurple-600">Mission</span>
+              Join Our <span className="text-ink">Mission</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8">
               We're building the future of education technology at ViaVeri. Join our team of passionate
@@ -68,8 +68,8 @@ const CareersPage: React.FC = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Why Join ViaVeri?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="text-center">
-              <div className="mx-auto bg-viapurple-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Code className="h-8 w-8 text-viapurple-600" />
+              <div className="mx-auto bg-stone-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                <Code className="h-8 w-8 text-ink" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Modern Tech Stack</h3>
               <p className="text-gray-600">
@@ -78,8 +78,8 @@ const CareersPage: React.FC = () => {
             </Card>
 
             <Card className="text-center">
-              <div className="mx-auto bg-viapurple-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Building2 className="h-8 w-8 text-viapurple-600" />
+              <div className="mx-auto bg-stone-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                <Building2 className="h-8 w-8 text-ink" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Startup Culture</h3>
               <p className="text-gray-600">
@@ -88,8 +88,8 @@ const CareersPage: React.FC = () => {
             </Card>
 
             <Card className="text-center">
-              <div className="mx-auto bg-viapurple-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Palette className="h-8 w-8 text-viapurple-600" />
+              <div className="mx-auto bg-stone-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                <Palette className="h-8 w-8 text-ink" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Creative Freedom</h3>
               <p className="text-gray-600">
@@ -181,16 +181,16 @@ const CareersPage: React.FC = () => {
       {/* CTA Section */}
       <section className="py-16">
         <Container>
-          <div className="bg-viapurple-900 rounded-2xl p-8 md:p-12 text-center">
+          <div className="bg-ink rounded-2xl p-8 md:p-12 text-center">
             <h2 className="text-3xl font-bold text-white mb-4">Ready to Make an Impact?</h2>
-            <p className="text-viapurple-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-stone-100 mb-8 max-w-2xl mx-auto">
               Join our team and help shape the future of education technology. We're always looking for
               talented individuals who share our passion for innovation and learning.
             </p>
             <Button 
               variant="primary" 
               size="lg"
-              className="bg-white text-viapurple-600 hover:bg-gray-100"
+              className="bg-white text-ink hover:bg-stone-100"
             >
               View All Positions
             </Button>
@@ -211,7 +211,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description })
   return (
     <div className="flex items-start">
       <div className="flex-shrink-0 mr-6">
-        <div className="w-10 h-10 rounded-full bg-viapurple-600 text-white flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-full bg-ink text-white flex items-center justify-center font-bold">
           {number}
         </div>
       </div>

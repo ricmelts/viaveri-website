@@ -133,7 +133,7 @@ const ResourcesSection: React.FC = () => {
       <Container>
         <div className="text-center mb-12 opacity-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Educational <span className="text-viapurple-600">Resource Hub</span>
+            Educational <span className="text-ink">Resource Hub</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Access our library of free educational resources to supplement your learning journey and expand your knowledge.
@@ -148,7 +148,7 @@ const ResourcesSection: React.FC = () => {
                 key={category}
                 className={`px-3 py-2 text-sm rounded-full transition-colors ${
                   activeCategory === category
-                    ? "bg-viapurple-100 text-viapurple-700 font-medium"
+                    ? "bg-stone-100 text-ink font-medium"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
                 onClick={() => setActiveCategory(category)}
@@ -165,7 +165,7 @@ const ResourcesSection: React.FC = () => {
                 key={type}
                 className={`px-3 py-2 text-sm rounded-full transition-colors ${
                   activeType === type
-                    ? "bg-viapurple-100 text-viapurple-700 font-medium"
+                    ? "bg-stone-100 text-ink font-medium"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
                 onClick={() => setActiveType(type)}
@@ -212,10 +212,10 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, icon }) => {
           alt={resource.title}
           className="w-full h-48 object-cover rounded-lg"
         />
-        <span className="absolute top-3 left-3 bg-viapurple-600 text-white text-xs px-2 py-1 rounded-full">
+        <span className="absolute top-3 left-3 bg-ink text-white text-xs px-2 py-1 rounded-full">
           {resource.category}
         </span>
-        <span className="absolute top-3 right-3 bg-white text-viapurple-600 text-xs px-2 py-1 rounded-full font-medium flex items-center">
+        <span className="absolute top-3 right-3 bg-white text-ink text-xs px-2 py-1 rounded-full font-medium flex items-center">
           {icon}
           <span className="ml-1">
             {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}

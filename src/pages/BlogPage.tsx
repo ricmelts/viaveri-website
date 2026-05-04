@@ -58,7 +58,7 @@ const BlogPage: React.FC = () => {
       <Container>
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
-            ViaVeri <span className="text-viapurple-600">Blog</span>
+            ViaVeri <span className="text-ink">Blog</span>
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Insights, updates, and stories about education technology, learning innovation, and student success.
@@ -98,12 +98,12 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           alt={post.title}
           className="w-full h-48 object-cover rounded-lg"
         />
-        <span className="absolute top-3 left-3 bg-viapurple-600 text-white text-xs px-2 py-1 rounded-full">
+        <span className="absolute top-3 left-3 bg-ink text-white text-xs px-2 py-1 rounded-full">
           {post.category}
         </span>
       </div>
       
-      <h2 className="text-xl font-semibold mb-2 hover:text-viapurple-600 transition-colors">
+      <h2 className="text-xl font-semibold mb-2 hover:text-ink transition-colors">
         <a href={`/blog/${post.id}`}>{post.title}</a>
       </h2>
       

@@ -58,7 +58,6 @@ interface Product {
   features: string[];
   cta: string;
   href: string;
-  accent: 'viapurple' | 'accent' | 'success';
   highlight?: boolean;
 }
 
@@ -80,7 +79,6 @@ const products: Product[] = [
     ],
     cta: 'Book a call',
     href: BOOKING_LINKS.website,
-    accent: 'viapurple',
   },
   {
     id: 'ai-audit',
@@ -99,7 +97,6 @@ const products: Product[] = [
     ],
     cta: 'Email to book',
     href: BOOKING_LINKS.aiAudit,
-    accent: 'accent',
     highlight: true,
   },
   {
@@ -119,38 +116,8 @@ const products: Product[] = [
     ],
     cta: 'Inquire now',
     href: BOOKING_LINKS.consulting,
-    accent: 'success',
   },
 ];
-
-const accentStyles = {
-  viapurple: {
-    iconBg: 'bg-viapurple-500/20 text-viapurple-300',
-    badge: 'bg-viapurple-500/20 text-viapurple-200 border-viapurple-400/30',
-    price: 'text-white',
-    button:
-      'bg-viapurple-500 hover:bg-viapurple-600 active:bg-viapurple-700 text-white',
-    ring: 'hover:border-viapurple-400/40',
-    check: 'text-viapurple-300',
-  },
-  accent: {
-    iconBg: 'bg-accent-500/20 text-accent-300',
-    badge: 'bg-accent-500/20 text-accent-200 border-accent-400/30',
-    price: 'text-white',
-    button: 'bg-accent-500 hover:bg-accent-600 active:bg-accent-700 text-white',
-    ring: 'hover:border-accent-400/40',
-    check: 'text-accent-300',
-  },
-  success: {
-    iconBg: 'bg-success-500/20 text-success-300',
-    badge: 'bg-success-500/20 text-success-200 border-success-400/30',
-    price: 'text-white',
-    button:
-      'bg-success-500 hover:bg-success-600 active:bg-success-700 text-white',
-    ring: 'hover:border-success-400/40',
-    check: 'text-success-300',
-  },
-};
 
 type View = 'cards' | 'calendly' | 'booked';
 
@@ -273,7 +240,6 @@ const ProductsPopup: React.FC = () => {
       setView('calendly');
       return;
     }
-    // mailto or external — let the browser handle, then close popup
     close();
   };
 
@@ -287,47 +253,44 @@ const ProductsPopup: React.FC = () => {
       aria-labelledby="products-popup-title"
     >
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-black/30 animate-fade-in"
         onClick={close}
       />
 
-      <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto rounded-2xl bg-gradient-to-br from-viapurple-950 via-viapurple-900 to-viapurple-800 border border-white/10 shadow-2xl animate-slide-up">
-        <div className="absolute -top-16 -right-16 w-64 h-64 bg-viapurple-500 rounded-full opacity-20 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-accent-500 rounded-full opacity-20 blur-3xl pointer-events-none" />
-
+      <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto rounded-xl bg-white border border-stone-200 shadow-xl animate-slide-up">
         <button
           type="button"
           onClick={close}
           aria-label="Close"
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full text-stone-500 hover:text-ink hover:bg-stone-100 transition-colors"
         >
           <X className="h-5 w-5" />
         </button>
 
         {view === 'booked' ? (
           <div className="relative p-8 sm:p-12 text-center min-h-[420px] flex flex-col items-center justify-center">
-            <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-success-500/20 flex items-center justify-center">
-              <PartyPopper className="h-10 w-10 text-success-300" />
+            <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-stone-100 flex items-center justify-center">
+              <PartyPopper className="h-10 w-10 text-ink" />
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+            <h2 className="text-3xl sm:text-4xl font-bold text-ink mb-3">
               You're booked!
             </h2>
-            <p className="text-viapurple-100/90 max-w-xl mx-auto mb-2">
+            <p className="text-stone-600 max-w-xl mx-auto mb-2">
               Check your inbox for the calendar invite and meeting details.
             </p>
-            <p className="text-viapurple-200/70 text-sm max-w-xl mx-auto mb-8">
+            <p className="text-stone-500 text-sm max-w-xl mx-auto mb-8">
               We'll be in touch before the call to confirm anything we need from
               your side.
             </p>
             <button
               type="button"
               onClick={finishAndGoHome}
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-lg font-medium bg-viapurple-500 hover:bg-viapurple-600 active:bg-viapurple-700 text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-lg font-medium bg-ink hover:bg-ink/80 text-white transition-colors"
             >
               Back to home
               <ArrowRight className="h-4 w-4" />
             </button>
-            <p className="mt-5 text-xs text-viapurple-200/60">
+            <p className="mt-5 text-xs text-stone-400">
               Redirecting in {secondsLeft}s…
             </p>
           </div>
@@ -336,7 +299,7 @@ const ProductsPopup: React.FC = () => {
             <button
               type="button"
               onClick={() => setView('cards')}
-              className="inline-flex items-center gap-2 mb-4 text-sm font-medium text-viapurple-100 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 mb-4 text-sm font-medium text-stone-500 hover:text-ink transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to options
@@ -353,68 +316,60 @@ const ProductsPopup: React.FC = () => {
         ) : (
           <div className="relative p-6 sm:p-10">
             <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-              <div className="inline-flex items-center rounded-full border border-viapurple-400/30 bg-viapurple-800/30 px-3 py-1 text-sm text-viapurple-100 backdrop-blur-sm mb-4">
-                <span className="flex h-2 w-2 rounded-full bg-success-400 mr-2 animate-pulse" />
+              <div className="inline-flex items-center rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-sm text-stone-600 mb-4">
+                <span className="flex h-2 w-2 rounded-full bg-ink mr-2 animate-pulse" />
                 Special Offers
               </div>
               <h2
                 id="products-popup-title"
-                className="text-3xl sm:text-4xl font-bold text-white mb-3"
+                className="text-3xl sm:text-4xl font-bold text-ink mb-3"
               >
-                Pick what fits your{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">
-                  next move
-                </span>
+                Pick what fits your next move
               </h2>
-              <p className="text-viapurple-100/80">
+              <p className="text-stone-600">
                 From a fast launch site to a full AI strategy audit — book a time that works and we'll take it from there.
               </p>
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
               {products.map((p) => {
-                const styles = accentStyles[p.accent];
                 const isCalendly = p.href === 'calendly';
                 const isExternal = p.href.startsWith('http');
                 return (
                   <div
                     key={p.id}
-                    className={`relative flex flex-col rounded-xl border bg-white/5 backdrop-blur-sm p-6 transition-all ${
+                    className={`relative flex flex-col rounded-xl border bg-white p-6 transition-shadow hover:shadow-md ${
                       p.highlight
-                        ? 'border-accent-400/50 ring-1 ring-accent-400/30 md:-translate-y-2'
-                        : 'border-white/10'
-                    } ${styles.ring}`}
+                        ? 'border-ink md:-translate-y-2'
+                        : 'border-stone-200'
+                    }`}
                   >
                     {p.badge && (
-                      <span
-                        className={`absolute -top-3 left-6 inline-flex items-center rounded-full border px-3 py-0.5 text-xs font-medium ${styles.badge}`}
-                      >
+                      <span className="absolute -top-3 left-6 inline-flex items-center rounded-full border border-stone-200 bg-white px-3 py-0.5 text-xs font-medium text-stone-600">
                         {p.badge}
                       </span>
                     )}
 
-                    <div
-                      className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${styles.iconBg}`}
-                    >
+                    <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-stone-100 text-ink">
                       {p.icon}
                     </div>
 
-                    <h3 className="text-xl font-semibold text-white mb-1">
+                    <h3 className="text-xl font-semibold text-ink mb-1">
                       {p.title}
                     </h3>
 
                     <div className="flex items-baseline gap-2 mb-3">
-                      <span className={`text-3xl font-bold ${styles.price}`}>
+                      <span className="text-3xl font-bold text-ink">
                         {p.price}
                       </span>
                       {p.priceSuffix && (
-                        <span className="text-sm text-viapurple-200/80">
+                        <span className="text-sm text-stone-500">
                           {p.priceSuffix}
                         </span>
                       )}
                     </div>
 
-                    <p className="text-sm text-viapurple-100/80 mb-5">
+                    <p className="text-sm text-stone-600 mb-5">
                       {p.description}
                     </p>
 
@@ -422,11 +377,9 @@ const ProductsPopup: React.FC = () => {
                       {p.features.map((f) => (
                         <li
                           key={f}
-                          className="flex items-start gap-2 text-sm text-viapurple-50"
+                          className="flex items-start gap-2 text-sm text-stone-700"
                         >
-                          <Check
-                            className={`h-4 w-4 mt-0.5 flex-shrink-0 ${styles.check}`}
-                          />
+                          <Check className="h-4 w-4 mt-0.5 flex-shrink-0 text-ink" />
                           <span>{f}</span>
                         </li>
                       ))}
@@ -436,7 +389,7 @@ const ProductsPopup: React.FC = () => {
                       <button
                         type="button"
                         onClick={(e) => handleCtaClick(e, p.href)}
-                        className={`mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium transition-colors ${styles.button}`}
+                        className="mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium bg-ink text-white hover:bg-ink/80 transition-colors"
                       >
                         {p.cta}
                         <ArrowRight className="h-4 w-4" />
@@ -447,7 +400,7 @@ const ProductsPopup: React.FC = () => {
                         target={isExternal ? '_blank' : undefined}
                         rel={isExternal ? 'noopener noreferrer' : undefined}
                         onClick={(e) => handleCtaClick(e, p.href)}
-                        className={`mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium transition-colors ${styles.button}`}
+                        className="mt-auto inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg font-medium border border-ink text-ink hover:bg-ink hover:text-white transition-colors"
                       >
                         {p.cta}
                         <ArrowRight className="h-4 w-4" />
@@ -458,11 +411,11 @@ const ProductsPopup: React.FC = () => {
               })}
             </div>
 
-            <p className="mt-8 text-center text-xs text-viapurple-200/70">
+            <p className="mt-8 text-center text-xs text-stone-400">
               Questions? Email{' '}
               <a
                 href="mailto:info@viaveri.co"
-                className="underline hover:text-white"
+                className="underline hover:text-ink"
               >
                 info@viaveri.co
               </a>

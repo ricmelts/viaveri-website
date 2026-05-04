@@ -72,7 +72,7 @@ const ScrollPath: React.FC = () => {
 
         {/* Animated progress line */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 bg-gradient-to-b from-viapurple-500 to-accent-500 transition-all duration-300"
+          className="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 bg-ink transition-all duration-300"
           style={{ height: `${scrollProgress}%` }}
         ></div>
 
@@ -94,8 +94,8 @@ const ScrollPath: React.FC = () => {
                 <span
                   className={`absolute right-full mr-4 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                     isActive
-                      ? 'opacity-100 translate-x-0 bg-viapurple-600 text-white'
-                      : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 bg-gray-900 text-white'
+                      ? 'opacity-100 translate-x-0 bg-ink text-white'
+                      : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 bg-ink text-white'
                   }`}
                 >
                   {section.label}
@@ -105,18 +105,15 @@ const ScrollPath: React.FC = () => {
                 <div
                   className={`relative w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                     isActive
-                      ? 'bg-viapurple-600 border-viapurple-600 text-white shadow-lg shadow-viapurple-300 scale-110'
+                      ? 'bg-ink border-ink text-white shadow-lg scale-110'
                       : isPassed
-                      ? 'bg-white border-viapurple-400 text-viapurple-600'
-                      : 'bg-white border-gray-300 text-gray-400 group-hover:border-viapurple-300 group-hover:text-viapurple-500'
+                      ? 'bg-white border-stone-400 text-stone-500'
+                      : 'bg-white border-gray-300 text-gray-400 group-hover:border-stone-300 group-hover:text-stone-500'
                   }`}
                 >
                   {section.icon}
 
-                  {/* Pulse animation for active section */}
-                  {isActive && (
-                    <span className="absolute inset-0 rounded-full bg-viapurple-400 animate-ping opacity-75"></span>
-                  )}
+                  {/* Pulse animation for active section removed */}
                 </div>
               </button>
             );

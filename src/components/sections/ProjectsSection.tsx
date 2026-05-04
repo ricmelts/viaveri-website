@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import Container from '../ui/Container';
-import Button from '../ui/Button';
-import { ExternalLink, Brain, Code, Sparkles } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 interface Project {
   name: string;
   description: string;
-  icon: React.ReactNode;
   tags: string[];
   link?: string;
   status: 'live' | 'beta' | 'coming-soon';
@@ -43,7 +41,6 @@ const ProjectsSection: React.FC = () => {
     {
       name: "ViaLearn",
       description: "A Canvas app that helps students plan coursework, and provides teachers with powerful analytics, pre-grading, and performance tracking.",
-      icon: <Brain className="h-8 w-8" />,
       tags: ["Education", "AI/ML", "Analytics", "Automation"],
       link: "https://vialearn.io",
       status: "live"
@@ -51,7 +48,6 @@ const ProjectsSection: React.FC = () => {
     {
       name: "ViaRAG",
       description: "Fastest way to build RAG applications for backend.",
-      icon: <Code className="h-8 w-8" />,
       tags: ["Open Source", "Cloud", "API"],
       link: "https://viarag.ai",
       status: "live"
@@ -59,98 +55,87 @@ const ProjectsSection: React.FC = () => {
     {
       name: "ViaStaff",
       description: "Easy to deploy AI agents, call our demo and learn more.",
-      icon: <Sparkles className="h-8 w-8" />,
       tags: ["Agentic AI", "Automation", "Workflow"],
       link: "tel:248-970-9025",
       status: "live"
     }
   ];
 
-  const getStatusBadge = (status: Project['status']) => {
-    switch (status) {
-      case 'live':
-        return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-success-100 text-success-700">Live</span>;
-      case 'beta':
-        return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-100 text-accent-700">Beta</span>;
-      case 'coming-soon':
-        return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-warning-100 text-warning-700">Coming Soon</span>;
-    }
-  };
+  const [featured, ...rest] = projects;
 
   return (
-    <section id="projects" className="py-24 bg-white">
+    <section id="projects" className="py-24 bg-stone-50">
       <Container>
         <div ref={sectionRef} className="max-w-6xl mx-auto opacity-0">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-500 to-accent-500">Projects</span>
+          <div className="mb-16">
+            <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-4">Projects</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-ink leading-tight mb-4">
+              Our Work
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="font-sans text-xl text-stone-500 font-light max-w-2xl">
               Innovative solutions that push boundaries and create real impact across different industries.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-1 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border-2 border-gray-100 hover:border-viapurple-200 transition-all hover:shadow-lg"
-              >
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-viapurple-500 to-accent-500 flex items-center justify-center text-white">
-                      {project.icon}
-                    </div>
-                  </div>
-
-                  <div className="flex-grow">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">{project.name}</h3>
-                        {getStatusBadge(project.status)}
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-3 py-1 rounded-full text-sm bg-viapurple-50 text-viapurple-700 border border-viapurple-100"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {project.link && project.status === 'live' && (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">
-                        <Button
-                          variant="outline"
-                          icon={<ExternalLink className="h-4 w-4" />}
-                          iconPosition="right"
-                          className="border-viapurple-300 text-viapurple-700 hover:bg-viapurple-50"
-                        >
-                          Visit Project
-                        </Button>
-                      </a>
-                    )}
-                  </div>
-                </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            <div className="md:col-span-2 bg-white border border-stone-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow p-10 flex flex-col justify-between min-h-[280px]">
+              <div>
+                <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-4">{featured.tags.join(' · ')}</p>
+                <h3 className="font-display font-bold text-ink text-3xl mb-4">{featured.name}</h3>
+                <p className="font-sans text-stone-600 leading-relaxed">{featured.description}</p>
               </div>
-            ))}
+              {featured.link && featured.status === 'live' && (
+                <div className="mt-8">
+                  <a
+                    href={featured.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-sans text-ink underline underline-offset-4 hover:text-stone-600 transition-colors"
+                  >
+                    Visit Project
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-6">
+              {rest.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-white border border-stone-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow p-8 flex flex-col justify-between flex-1"
+                >
+                  <div>
+                    <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-3">{project.tags.join(' · ')}</p>
+                    <h3 className="font-display font-bold text-ink text-xl mb-3">{project.name}</h3>
+                    <p className="font-sans text-stone-600 text-sm leading-relaxed">{project.description}</p>
+                  </div>
+                  {project.link && project.status === 'live' && (
+                    <div className="mt-6">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-sans text-sm text-ink underline underline-offset-4 hover:text-stone-600 transition-colors"
+                      >
+                        Visit Project
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="text-center mt-12 p-8 bg-gradient-to-br from-viapurple-50 to-accent-50 rounded-2xl">
-            <h3 className="text-2xl font-bold text-gray-900 mb-3">Have a project idea?</h3>
-            <p className="text-gray-600 mb-6">We're always looking for new challenges and opportunities to innovate.</p>
-            <a href="mailto:info@viaveri.co">
-              <Button variant="primary" size="lg">
-                Let's Talk
-              </Button>
+          <div className="border border-stone-200 bg-white rounded-lg p-10 text-center">
+            <h3 className="font-display font-bold text-ink text-2xl mb-3">Have a project idea?</h3>
+            <p className="font-sans text-stone-600 mb-6">We're always looking for new challenges and opportunities to innovate.</p>
+            <a
+              href="mailto:info@viaveri.co"
+              className="font-sans text-ink underline underline-offset-4 hover:text-stone-600 transition-colors"
+            >
+              Let's Talk
             </a>
           </div>
         </div>

@@ -8,13 +8,13 @@ const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-viapurple-950 via-viapurple-900 to-viapurple-800 py-20">
+      <div className="bg-ink py-20">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl font-bold mb-4">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">ViaVeri</span>
+              About <span className="text-white">ViaVeri</span>
             </h1>
-            <p className="text-viapurple-50/90 max-w-2xl mx-auto">
+            <p className="text-stone-100/90 max-w-2xl mx-auto">
               Transforming education through innovative technology and personalized learning experiences.
             </p>
           </div>
@@ -43,7 +43,7 @@ const AboutPage: React.FC = () => {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-br from-viapurple-400 to-accent-400 rounded-2xl blur-md opacity-70"></div>
+            <div className="absolute -inset-1 bg-ink rounded-2xl blur-md opacity-20"></div>
             <div className="relative">
               <img 
                 src="https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
@@ -57,8 +57,8 @@ const AboutPage: React.FC = () => {
         {/* Mission, Vision, Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <Card className="text-center">
-            <div className="mx-auto bg-viapurple-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-              <Target className="h-8 w-8 text-viapurple-600" />
+            <div className="mx-auto bg-stone-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+              <Target className="h-8 w-8 text-ink" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Our Mission</h3>
             <p className="text-gray-600">
@@ -67,8 +67,8 @@ const AboutPage: React.FC = () => {
           </Card>
 
           <Card className="text-center">
-            <div className="mx-auto bg-viapurple-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-              <Sparkles className="h-8 w-8 text-viapurple-600" />
+            <div className="mx-auto bg-stone-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+              <Sparkles className="h-8 w-8 text-ink" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Our Vision</h3>
             <p className="text-gray-600">
@@ -77,8 +77,8 @@ const AboutPage: React.FC = () => {
           </Card>
 
           <Card className="text-center">
-            <div className="mx-auto bg-viapurple-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-              <Rocket className="h-8 w-8 text-viapurple-600" />
+            <div className="mx-auto bg-stone-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+              <Rocket className="h-8 w-8 text-ink" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Our Values</h3>
             <p className="text-gray-600">
@@ -90,7 +90,7 @@ const AboutPage: React.FC = () => {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
           <div className="text-center">
-            <div className="text-4xl font-bold text-viapurple-600 mb-2">20k+</div>
+            <div className="text-4xl font-bold text-ink mb-2">20k+</div>
             <div className="text-gray-600 flex items-center justify-center">
               <Users className="h-4 w-4 mr-1" />
               Active Students
@@ -98,7 +98,7 @@ const AboutPage: React.FC = () => {
           </div>
           
           <div className="text-center">
-            <div className="text-4xl font-bold text-viapurple-600 mb-2">300+</div>
+            <div className="text-4xl font-bold text-ink mb-2">300+</div>
             <div className="text-gray-600 flex items-center justify-center">
               <BookOpen className="h-4 w-4 mr-1" />
               Expert-Led Courses
@@ -106,7 +106,7 @@ const AboutPage: React.FC = () => {
           </div>
           
           <div className="text-center">
-            <div className="text-4xl font-bold text-viapurple-600 mb-2">95%</div>
+            <div className="text-4xl font-bold text-ink mb-2">95%</div>
             <div className="text-gray-600 flex items-center justify-center">
               <Award className="h-4 w-4 mr-1" />
               Completion Rate
@@ -114,7 +114,7 @@ const AboutPage: React.FC = () => {
           </div>
           
           <div className="text-center">
-            <div className="text-4xl font-bold text-viapurple-600 mb-2">50+</div>
+            <div className="text-4xl font-bold text-ink mb-2">50+</div>
             <div className="text-gray-600 flex items-center justify-center">
               <Users className="h-4 w-4 mr-1" />
               Team Members

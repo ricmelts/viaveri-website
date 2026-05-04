@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Container from '../ui/Container';
-import { Lightbulb, Target, Zap } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -33,57 +32,52 @@ const AboutSection: React.FC = () => {
     <section id="about" className="py-24 bg-white">
       <Container>
         <div ref={sectionRef} className="max-w-5xl mx-auto opacity-0">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-500 to-accent-500">ViaVeri</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're on a mission to transform business AI experience by providing custom solutions,
-              creative problem-solving, and a commitment to excellence.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center p-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-viapurple-100 mb-4">
-                <Lightbulb className="h-8 w-8 text-viapurple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Innovation First</h3>
-              <p className="text-gray-600">
-                We are committed to developing open-source projects and love to build community through innovative projects.
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div>
+              <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-4">About</p>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-ink leading-tight mb-4">
+                Building technology that opens doors.
+              </h2>
+              <p className="font-display italic text-xl text-stone-500 leading-relaxed">
+                We're on a mission to transform the AI experience by providing custom solutions,
+                creative problem-solving, and a commitment to excellence.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent-100 mb-4">
-                <Target className="h-8 w-8 text-accent-600" />
+            <div className="space-y-8 pt-2">
+              <hr className="border-stone-200" />
+              <div>
+                <h3 className="font-sans font-semibold text-ink mb-2">Innovation First</h3>
+                <p className="font-sans text-stone-600 leading-relaxed">
+                  We are committed to developing open-source projects and love to build community through innovative work.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">User-Focused</h3>
-              <p className="text-gray-600">
-                Every product we build starts with fixing real people's problems. 
-              </p>
-            </div>
-
-            <div className="text-center p-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success-100 mb-4">
-                <Zap className="h-8 w-8 text-success-600" />
+              <hr className="border-stone-200" />
+              <div>
+                <h3 className="font-sans font-semibold text-ink mb-2">User-Focused</h3>
+                <p className="font-sans text-stone-600 leading-relaxed">
+                  Every product we build starts with fixing real people's problems.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Impact Driven</h3>
-              <p className="text-gray-600">
-                We measure success by our positive impact on the community and their feedback to our products.
-              </p>
+              <hr className="border-stone-200" />
+              <div>
+                <h3 className="font-sans font-semibold text-ink mb-2">Impact Driven</h3>
+                <p className="font-sans text-stone-600 leading-relaxed">
+                  We measure success by our positive impact on the community and their feedback to our products.
+                </p>
+              </div>
+              <hr className="border-stone-200" />
+              <div>
+                <h3 className="font-sans font-semibold text-ink mb-2">Our Story</h3>
+                <p className="font-sans text-stone-600 leading-relaxed mb-3">
+                  ViaVeri was founded with a simple belief: technology shouldn't be gatekept and education for it should be accessible to everyone.
+                </p>
+                <p className="font-sans text-stone-600 leading-relaxed">
+                  Today, we're proud to work on cutting-edge solutions across education, automation, and beyond.
+                  Each project represents our commitment to innovation, quality, and making a real difference.
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div className="bg-gradient-to-br from-viapurple-50 to-accent-50 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Story</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              ViaVeri was founded with a simple belief: technology shouldn't be gatekept and education for it should be accessible to everyone.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Today, we're proud to work on cutting-edge solutions across education, automation, and beyond.
-              Each project represents our commitment to innovation, quality, and making a real difference.
-            </p>
           </div>
         </div>
       </Container>

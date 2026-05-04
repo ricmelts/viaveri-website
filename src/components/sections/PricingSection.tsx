@@ -13,7 +13,7 @@ const PricingSection: React.FC = () => {
         <Container>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Custom, <span className="text-viapurple-600">Individualized</span> Pricing
+              Custom, <span className="text-ink">Individualized</span> Pricing
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Choose the plan that's right for you or your institution
@@ -23,13 +23,13 @@ const PricingSection: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Student Plan */}
             <Card hoverable className="relative overflow-hidden">
-              <div className="absolute top-4 right-4 bg-viapurple-100 text-viapurple-700 px-3 py-1 rounded-full text-sm font-medium">
+              <div className="absolute top-4 right-4 bg-stone-100 text-ink px-3 py-1 rounded-full text-sm font-medium">
                 Most Popular
               </div>
               <div className="mb-6">
                 <h3 className="text-2xl font-bold mb-2">Student</h3>
                 <div className="flex items-baseline">
-                  <span className="text-4xl font-bold text-viapurple-600">Free</span>
+                  <span className="text-4xl font-bold text-ink">Free</span>
                   <span className="text-gray-500 ml-2">forever</span>
                 </div>
               </div>
@@ -50,14 +50,14 @@ const PricingSection: React.FC = () => {
             </Card>
 
             {/* Institution Plan */}
-            <Card hoverable className="relative overflow-hidden border-2 border-viapurple-200">
-              <div className="absolute top-4 right-4 bg-viapurple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+            <Card hoverable className="relative overflow-hidden border-2 border-stone-200">
+              <div className="absolute top-4 right-4 bg-ink text-white px-3 py-1 rounded-full text-sm font-medium">
                 Enterprise
               </div>
               <div className="mb-6">
                 <h3 className="text-2xl font-bold mb-2">Institution</h3>
                 <div className="flex items-baseline">
-                  <span className="text-4xl font-bold text-viapurple-600">Custom</span>
+                  <span className="text-4xl font-bold text-ink">Custom</span>
                   <span className="text-gray-500 ml-2">per institution</span>
                 </div>
               </div>
@@ -107,7 +107,7 @@ interface FeatureProps {
 
 const Feature: React.FC<FeatureProps> = ({ text }) => (
   <div className="flex items-center">
-    <Check className="h-5 w-5 text-viapurple-600 mr-2" />
+    <Check className="h-5 w-5 text-ink mr-2" />
     <span className="text-gray-600">{text}</span>
   </div>
 );

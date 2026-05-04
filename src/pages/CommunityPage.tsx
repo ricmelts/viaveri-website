@@ -6,13 +6,13 @@ import { Users, Building2, GraduationCap, Rocket, ArrowRight, Calendar, MapPin }
 
 const CommunityPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-24">
+    <div className="min-h-screen bg-white pt-24">
       {/* Hero Section */}
       <section className="py-16">
         <Container>
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Join Our Growing <span className="text-viapurple-600">Community</span>
+              Join Our Growing <span className="text-ink">Community</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8">
               We're proud to be part of the Burgess Start-up Accelerator at Michigan State University,
@@ -40,8 +40,8 @@ const CommunityPage: React.FC = () => {
               </p>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="bg-viapurple-100 p-2 rounded-lg mr-4">
-                    <Rocket className="h-5 w-5 text-viapurple-600" />
+                  <div className="bg-stone-100 p-2 rounded-lg mr-4">
+                    <Rocket className="h-5 w-5 text-ink" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Innovation Focus</h3>
@@ -49,8 +49,8 @@ const CommunityPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="bg-viapurple-100 p-2 rounded-lg mr-4">
-                    <Building2 className="h-5 w-5 text-viapurple-600" />
+                  <div className="bg-stone-100 p-2 rounded-lg mr-4">
+                    <Building2 className="h-5 w-5 text-ink" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">University Backing</h3>
@@ -58,8 +58,8 @@ const CommunityPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="bg-viapurple-100 p-2 rounded-lg mr-4">
-                    <Users className="h-5 w-5 text-viapurple-600" />
+                  <div className="bg-stone-100 p-2 rounded-lg mr-4">
+                    <Users className="h-5 w-5 text-ink" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Network Access</h3>
@@ -69,7 +69,7 @@ const CommunityPage: React.FC = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-br from-viapurple-400 to-accent-400 rounded-2xl blur-md opacity-70"></div>
+              <div className="absolute -inset-1 bg-ink rounded-2xl blur-md opacity-20"></div>
               <div className="relative">
                 <img
                   src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -121,11 +121,11 @@ const CommunityPage: React.FC = () => {
       {/* Get Involved Section */}
       <section className="py-16">
         <Container>
-          <div className="bg-viapurple-900 rounded-2xl p-8 md:p-12 text-white">
+          <div className="bg-ink rounded-2xl p-8 md:p-12 text-white">
             <div className="max-w-3xl mx-auto text-center">
-              <GraduationCap className="h-12 w-12 mx-auto mb-6 text-viapurple-300" />
+              <GraduationCap className="h-12 w-12 mx-auto mb-6 text-stone-300" />
               <h2 className="text-3xl font-bold mb-4">Ready to Make an Impact?</h2>
-              <p className="text-viapurple-100 mb-8">
+              <p className="text-stone-100 mb-8">
                 Join our community of educators, innovators, and learners who are shaping the future of education.
                 Whether you're a student, educator, or industry professional, there's a place for you in our community.
               </p>
@@ -161,7 +161,7 @@ const EventCard: React.FC<EventCardProps> = ({ title, date, location, descriptio
   return (
     <Card hoverable>
       <div className="mb-4">
-        <span className="inline-block bg-viapurple-100 text-viapurple-700 text-sm px-2.5 py-0.5 rounded-full">
+        <span className="inline-block bg-stone-100 text-ink text-sm px-2.5 py-0.5 rounded-full">
           {type}
         </span>
       </div>

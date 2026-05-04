@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
-import Button from '../ui/Button';
-import { Briefcase, Bot, TrendingUp, Workflow, ArrowRight } from 'lucide-react';
 
 const BusinessesSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -35,61 +33,46 @@ const BusinessesSection: React.FC = () => {
     <section id="businesses" className="py-24 bg-white">
       <Container>
         <div ref={sectionRef} className="max-w-6xl mx-auto opacity-0">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center rounded-full border border-success-200 bg-success-50 px-3 py-1 text-sm text-success-700 mb-4">
-              <Briefcase className="h-4 w-4 mr-2" />
-              For Businesses
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              ViaStaff: <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-500 to-accent-500">AI Agent Solutions</span>
+          <div className="mb-16">
+            <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-4">For Businesses</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-ink leading-tight mb-4">
+              ViaStaff
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="font-sans text-xl text-stone-500 font-light max-w-2xl">
               Intelligent AI agents that automate workflows, handle customer inquiries, and streamline
               operations for small to medium-sized businesses.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-200">
-              <div className="w-12 h-12 rounded-lg bg-success-100 flex items-center justify-center mb-4">
-                <Bot className="h-6 w-6 text-success-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Intelligent Automation</h3>
-              <p className="text-gray-600 text-sm">
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-white border border-stone-200 rounded-lg p-8 hover:shadow-md transition-shadow">
+              <h3 className="font-display font-bold text-ink text-lg mb-3">Intelligent Automation</h3>
+              <p className="font-sans text-stone-600 text-sm leading-relaxed">
                 AI agents handle repetitive tasks, freeing your team for higher-value work.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-200">
-              <div className="w-12 h-12 rounded-lg bg-success-100 flex items-center justify-center mb-4">
-                <Workflow className="h-6 w-6 text-success-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Workflow Integration</h3>
-              <p className="text-gray-600 text-sm">
-                Seamlessly integrate with your existing tools—no disruption to workflows.
+            <div className="bg-white border border-stone-200 rounded-lg p-8 hover:shadow-md transition-shadow">
+              <h3 className="font-display font-bold text-ink text-lg mb-3">Workflow Integration</h3>
+              <p className="font-sans text-stone-600 text-sm leading-relaxed">
+                Seamlessly integrate with your existing tools — no disruption to workflows.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-200">
-              <div className="w-12 h-12 rounded-lg bg-success-100 flex items-center justify-center mb-4">
-                <TrendingUp className="h-6 w-6 text-success-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Boost Productivity</h3>
-              <p className="text-gray-600 text-sm">
+            <div className="bg-white border border-stone-200 rounded-lg p-8 hover:shadow-md transition-shadow">
+              <h3 className="font-display font-bold text-ink text-lg mb-3">Boost Productivity</h3>
+              <p className="font-sans text-stone-600 text-sm leading-relaxed">
                 Increase efficiency by automating up to 70% of routine tasks.
               </p>
             </div>
           </div>
 
-          <div className="text-center">
-            <Link to="/businesses">
-              <Button
-                size="lg"
-                icon={<ArrowRight className="h-5 w-5" />}
-                iconPosition="right"
-              >
-                Learn More About ViaStaff
-              </Button>
+          <div>
+            <Link
+              to="/businesses"
+              className="font-sans text-ink underline underline-offset-4 hover:text-stone-600 transition-colors"
+            >
+              Learn More About ViaStaff
             </Link>
           </div>
         </div>

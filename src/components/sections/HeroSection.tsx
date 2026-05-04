@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
-import Button from '../ui/Button';
-import { ArrowRight, GraduationCap, Code, Briefcase } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -39,74 +38,57 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <div id="hero" className="relative overflow-hidden min-h-screen flex items-center py-20 pt-28 md:pt-32 bg-gradient-to-br from-viapurple-950 via-viapurple-900 to-viapurple-800 animate-gradient-x">
-      {/* Background gradient orbs */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-viapurple-500 rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-accent-500 rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
-
+    <div id="hero" className="relative bg-white overflow-hidden min-h-screen flex items-center pt-32 pb-24">
       <Container>
-        <div ref={heroRef} className="relative z-10 max-w-4xl mx-auto text-center opacity-0">
-          <div className="inline-flex items-center rounded-full border border-viapurple-400/30 bg-viapurple-800/30 px-3 py-1 text-sm text-viapurple-100 backdrop-blur-sm mb-6">
-            <span className="flex h-2 w-2 rounded-full bg-success-400 mr-2 animate-pulse"></span>
-            Building the Future
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-viapurple-400 to-accent-400">Technology Team</span>
+        <div ref={heroRef} className="relative z-10 max-w-4xl mx-auto text-center opacity-0 animate-fade-in">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-ink leading-[1.05] tracking-tight mb-6">
+            Your <em>Technology</em> Team
           </h1>
 
-          <p className="text-lg md:text-xl text-viapurple-50/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-stone-500 font-sans font-light max-w-xl mx-auto mb-10">
             ViaVeri builds cutting-edge software solutions across industries.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-16">
-            <Button
-              size="lg"
-              icon={<ArrowRight className="h-5 w-5" />}
-              iconPosition="right"
+          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
+            <button
               onClick={() => scrollToSection('projects')}
+              className="inline-flex items-center gap-2 bg-ink text-white font-sans font-medium px-6 py-3 rounded-lg hover:bg-ink-light transition-colors"
             >
               Explore Our Work
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white/20 text-white hover:bg-white/10 active:bg-white/20"
+              <ArrowRight className="h-5 w-5" />
+            </button>
+            <button
               onClick={() => scrollToSection('about')}
+              className="inline-flex items-center gap-2 border border-ink text-ink font-sans font-medium px-6 py-3 rounded-lg hover:bg-stone-50 transition-colors"
             >
               Learn More
-            </Button>
+            </button>
           </div>
 
-          {/* Feature highlights */}
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <Link to="/schools" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
-              <div className="w-12 h-12 rounded-lg bg-viapurple-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-viapurple-500/30 transition-all">
-                <GraduationCap className="h-6 w-6 text-viapurple-300" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">For Schools</h3>
-              <p className="text-viapurple-200 text-sm">
-                ViaLearn, the Canvas native AI assistant.
+          <hr className="border-stone-200 mt-20" />
+
+          <div className="grid md:grid-cols-3 gap-6 mt-10">
+            <Link to="/schools" className="bg-stone-50 border border-stone-200 rounded-lg p-6 text-left hover:shadow-md transition-shadow">
+              <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-3">For Schools</p>
+              <h3 className="font-sans font-bold text-ink mb-2">ViaLearn</h3>
+              <p className="text-stone-600 font-sans text-sm">
+                The Canvas native AI assistant for students and teachers.
               </p>
             </Link>
 
-            <Link to="/developers" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
-              <div className="w-12 h-12 rounded-lg bg-accent-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-500/30 transition-all">
-                <Code className="h-6 w-6 text-accent-300" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">For Developers</h3>
-              <p className="text-viapurple-200 text-sm">
-                ViaRAG, the fastest way to build RAG applications.
+            <Link to="/developers" className="bg-stone-50 border border-stone-200 rounded-lg p-6 text-left hover:shadow-md transition-shadow">
+              <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-3">For Developers</p>
+              <h3 className="font-sans font-bold text-ink mb-2">ViaRAG</h3>
+              <p className="text-stone-600 font-sans text-sm">
+                The fastest way to build RAG applications.
               </p>
             </Link>
 
-            <Link to="/businesses" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
-              <div className="w-12 h-12 rounded-lg bg-success-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-success-500/30 transition-all">
-                <Briefcase className="h-6 w-6 text-success-300" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">For Businesses</h3>
-              <p className="text-viapurple-200 text-sm">
-                ViaStaff, an AI agent solution for your workplace that won't break your budget.
+            <Link to="/businesses" className="bg-stone-50 border border-stone-200 rounded-lg p-6 text-left hover:shadow-md transition-shadow">
+              <p className="text-xs tracking-widest uppercase text-stone-400 font-sans mb-3">For Businesses</p>
+              <h3 className="font-sans font-bold text-ink mb-2">ViaStaff</h3>
+              <p className="text-stone-600 font-sans text-sm">
+                An AI agent solution for your workplace that won't break your budget.
               </p>
             </Link>
           </div>

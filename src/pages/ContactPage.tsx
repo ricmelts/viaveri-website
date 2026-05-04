@@ -31,7 +31,7 @@ const ContactPage: React.FC = () => {
       <Container>
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
-            Contact <span className="text-viapurple-600">ViaLearn</span>
+            Contact <span className="text-ink">ViaLearn</span>
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Have questions or want to learn more? We're here to help. Reach out to our team for support, partnerships, or general inquiries.
@@ -53,7 +53,7 @@ const ContactPage: React.FC = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-viapurple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-stone-400 focus:border-transparent"
                     required
                   />
                 </div>
@@ -68,7 +68,7 @@ const ContactPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-viapurple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-stone-400 focus:border-transparent"
                     required
                   />
                 </div>
@@ -83,7 +83,7 @@ const ContactPage: React.FC = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-viapurple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-stone-400 focus:border-transparent"
                     required
                   />
                 </div>
@@ -98,7 +98,7 @@ const ContactPage: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-viapurple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-stone-400 focus:border-transparent"
                     required
                   ></textarea>
                 </div>
@@ -121,14 +121,14 @@ const ContactPage: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-lg bg-viapurple-100 flex items-center justify-center">
-                      <Mail className="h-5 w-5 text-viapurple-600" />
+                    <div className="h-10 w-10 rounded-lg bg-stone-100 flex items-center justify-center">
+                      <Mail className="h-5 w-5 text-ink" />
                     </div>
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Email</h3>
                     <p className="mt-1 text-gray-600">
-                      <a href="mailto:info@viaveri.co" className="hover:text-viapurple-600">
+                      <a href="mailto:info@viaveri.co" className="hover:text-ink">
                         info@viaveri.co
                       </a>
                     </p>
@@ -137,14 +137,14 @@ const ContactPage: React.FC = () => {
 
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-lg bg-viapurple-100 flex items-center justify-center">
-                      <Phone className="h-5 w-5 text-viapurple-600" />
+                    <div className="h-10 w-10 rounded-lg bg-stone-100 flex items-center justify-center">
+                      <Phone className="h-5 w-5 text-ink" />
                     </div>
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Phone</h3>
                     <p className="mt-1 text-gray-600">
-                      <a href="tel:+15551234567" className="hover:text-viapurple-600">
+                      <a href="tel:+15551234567" className="hover:text-ink">
                         +1 (555) 123-4567
                       </a>
                     </p>
@@ -153,8 +153,8 @@ const ContactPage: React.FC = () => {
 
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-lg bg-viapurple-100 flex items-center justify-center">
-                      <MapPin className="h-5 w-5 text-viapurple-600" />
+                    <div className="h-10 w-10 rounded-lg bg-stone-100 flex items-center justify-center">
+                      <MapPin className="h-5 w-5 text-ink" />
                     </div>
                   </div>
                   <div className="ml-4">

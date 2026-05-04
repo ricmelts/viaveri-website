@@ -3,7 +3,7 @@ import Container from '../components/ui/Container';
 
 const TechnologyPage: React.FC = () => {
   return (
-    <div className="py-20 min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="py-20 min-h-screen bg-white">
       <Container>
         <h1 className="text-4xl font-bold mb-8">Our Technology</h1>
         <div className="prose max-w-none">
